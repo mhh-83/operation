@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جزیره ضرب و تقسیم - بازی آموزشی ریاضی پایه پنجم</title>
+    <title>جزیره ضرب و تقسیم - بازی آموزشی ریاضی</title>
     <!-- بارگذاری تیلویند برای طراحی واکنش‌گرا و مدرن -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- بارگذاری فونت وزیرمتن از گوگل فونت برای خوانایی عالی فارسی -->
@@ -71,21 +71,21 @@
     <!-- هدر و نوار وضعیت بازی -->
     <header class="bg-white/90 backdrop-blur-md shadow-md border-b-4 border-sky-400 sticky top-0 z-30">
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-            <!-- عنوان و لوگو -->
+            <!-- عنوان و ایموجی بازی -->
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-gradient-to-tr from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center text-3xl shadow-md">
-                    🧮
+                <div class="w-12 h-12 bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white text-2xl sm:text-3xl">
+                    🏝️
                 </div>
                 <div>
                     <h1 class="text-xl sm:text-2xl font-black text-sky-800 tracking-tight">جزیره ضرب و تقسیم</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 font-semibold">آموزش تعاملی ریاضی پایه پنجم</p>
+                    <p class="text-xs sm:text-sm text-slate-500 font-semibold">آموزش تعاملی ریاضی</p>
                 </div>
             </div>
 
             <!-- امتیاز، سطح و دکمه صدا -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="bg-amber-100 border-2 border-amber-400 px-3 sm:px-4 py-1.5 rounded-2xl flex items-center gap-2">
-                    <span class="text-xl sm:text-2xl">⭐</span>
+                    <span class="text-2xl">⭐</span>
                     <div>
                         <span class="text-xs text-amber-800 block font-bold">امتیاز کل</span>
                         <span id="scoreDisplay" class="text-lg sm:text-xl font-black text-amber-600 math-num">۰</span>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="bg-emerald-100 border-2 border-emerald-400 px-3 sm:px-4 py-1.5 rounded-2xl flex items-center gap-2">
-                    <span class="text-xl sm:text-2xl">🏆</span>
+                    <span class="text-2xl">🏆</span>
                     <div>
                         <span class="text-xs text-emerald-800 block font-bold">پاسخ درست</span>
                         <span id="streakDisplay" class="text-lg sm:text-xl font-black text-emerald-600 math-num">۰</span>
@@ -106,86 +106,116 @@
             </div>
         </div>
 
-        <!-- نوار پیشرفت -->
-        <div class="w-full bg-slate-200 h-3">
-            <div id="progressBar" class="bg-gradient-to-l from-emerald-400 via-sky-500 to-indigo-500 h-3 transition-all duration-500" style="width: 10%"></div>
+        <!-- نوار پیشرفت کلی -->
+        <div class="w-full bg-slate-200 h-2">
+            <div id="progressBar" class="bg-gradient-to-l from-emerald-400 to-sky-500 h-2 transition-all duration-500" style="width: 10%"></div>
         </div>
     </header>
 
-    <!-- انتخاب‌گر حالت بازی (تب‌ها) -->
-    <nav class="max-w-5xl mx-auto w-full px-4 mt-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white/80 p-2 rounded-3xl shadow-lg border-2 border-white">
+    <!-- بدنه اصلی بازی -->
+    <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-grow space-y-6">
+
+        <!-- دکمه‌های انتخاب بخش‌های بازی -->
+        <nav class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white/80 backdrop-blur p-2.5 rounded-3xl shadow-md border-2 border-white">
             <button id="tabVisual" onclick="switchMode('visual')" class="btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-amber-400 text-black border-2 border-amber-500">
-                <span class="text-2xl">🍎</span>
-                <span>بخش ۱: آزمایشگاه تقسیم</span>
+                <span>🧺</span> بخش ۱: آزمایشگاه تقسیم
             </button>
-            <button id="tabChallenge" onclick="switchMode('challenge')" class="btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-sky-50 border-2 border-slate-200">
-                <span class="text-2xl">🚀</span>
-                <span>بخش ۲: چالش تقسیم</span>
+            <button id="tabChallenge" onclick="switchMode('challenge')" class="btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 border-2 border-slate-200">
+                <span>➗</span> بخش ۲: چالش تقسیم
             </button>
-            <button id="tabMultiply" onclick="switchMode('multiply')" class="btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-purple-50 border-2 border-slate-200">
-                <span class="text-2xl">✖️</span>
-                <span>بخش ۳: چالش ضرب</span>
+            <button id="tabMultiply" onclick="switchMode('multiply')" class="btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 border-2 border-slate-200">
+                <span>✖️</span> بخش ۳: چالش ضرب
             </button>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- محتوای اصلی بازی -->
-    <main class="max-w-6xl mx-auto w-full px-4 py-6 flex-grow">
+        <!-- بنر نمایش پیام‌های بازخورد (موفقیت یا خطا) -->
+        <div id="feedbackBanner" class="hidden p-4 rounded-2xl border-2 font-bold text-center text-base sm:text-lg shadow-sm transition-all"></div>
 
-        <!-- کادر پیام بازخورد شناور (جایگزین alert) -->
-        <div id="feedbackBanner" class="hidden max-w-3xl mx-auto mb-5 p-4 rounded-2xl border-4 text-center font-bold text-lg sm:text-xl shadow-lg transition-all"></div>
-
-        <!-- ==================== حالت ۱: آزمایشگاه بصری و دسته‌بندی ==================== -->
+        <!-- ==================== حالت ۱: آزمایشگاه بصری و ارزش مکانی ==================== -->
         <section id="visualSection" class="space-y-6 text-black">
             <!-- کارت صورت مسئله بصری -->
             <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-xl border-4 border-amber-300 text-black">
-                <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-slate-100 pb-4">
-                    <div>
-                        <span class="bg-amber-200 text-black text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full">تمرین دست‌ورزی و مفهومی</span>
-                        <h2 id="visualStoryText" class="text-xl sm:text-2xl md:text-3xl font-black text-black mt-2 leading-relaxed">
-                            می‌خواهیم ۱۷ سیب را به طور مساوی در ۳ سبد تقسیم کنیم.
-                        </h2>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="autoDistributeStep()" class="btn-3d bg-sky-500 hover:bg-sky-600 text-white font-bold px-4 py-2.5 rounded-2xl text-sm sm:text-base flex items-center gap-1.5">
-                            <span>⚡</span> توزیع یک دور مساوی
+                <!-- نوار انتخاب سطح و ساخت مسئله دلخواه -->
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-slate-100 pb-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-amber-200 text-black text-xs sm:text-sm font-extrabold px-3 py-1.5 rounded-full">ارزش مکانی و دسته‌بندی</span>
+                        <button onclick="setVisPreset('small')" id="visPresetSmall" class="px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-amber-500 text-black border border-amber-600 shadow-sm">
+                            اعداد کوچک (تا ۳۰)
                         </button>
-                        <button onclick="initVisualQuestion()" class="btn-3d bg-slate-200 hover:bg-slate-300 text-black font-bold px-4 py-2.5 rounded-2xl text-sm sm:text-base">
+                        <button onclick="setVisPreset('medium')" id="visPresetMedium" class="px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-black hover:bg-slate-200 border border-slate-300">
+                            دو و سه رقمی
+                        </button>
+                        <button onclick="setVisPreset('large')" id="visPresetLarge" class="px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-black hover:bg-slate-200 border border-slate-300">
+                            سه و چهار رقمی
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="toggleCustomVisModal()" class="btn-3d bg-purple-200 hover:bg-purple-300 text-black font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm border border-purple-400">
+                            ✏️ عدد دلخواه
+                        </button>
+                        <button onclick="initVisualQuestion()" class="btn-3d bg-slate-200 hover:bg-slate-300 text-black font-bold px-4 py-2 rounded-2xl text-xs sm:text-sm border border-slate-300">
                             🔄 سوال جدید
                         </button>
                     </div>
                 </div>
 
-                <!-- راهنمای سریع تعامل -->
-                <p class="text-black text-sm sm:text-base mt-3 font-semibold flex items-center gap-2">
-                    <span>💡</span>
-                    <span>روی آیتم‌ها کلیک کنید یا آن‌ها را بکشید و داخل سبدها بیندازید تا در همه سبدها تعداد <strong>مساوی</strong> قرار گیرد.</span>
-                </p>
+                <!-- کادر ورود مسئله دلخواه (مخفی به صورت پیش‌فرض) -->
+                <div id="customVisBox" class="hidden mt-4 bg-purple-50 border-2 border-purple-300 rounded-2xl p-4 flex flex-wrap items-center justify-center gap-3 text-black">
+                    <span class="font-black text-sm sm:text-base">مسئله دلخواه بسازید:</span>
+                    <div class="flex items-center gap-1.5">
+                        <label for="customDividendInput" class="text-sm font-bold">مقسوم (تا ۹۹۹۹):</label>
+                        <input type="number" id="customDividendInput" min="2" max="9999" value="345" class="w-24 text-center py-1.5 px-2 rounded-xl border-2 border-purple-400 text-black font-black math-num bg-white">
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <label for="customDivisorInput" class="text-sm font-bold">تعداد سبد (۲ تا ۱۲):</label>
+                        <input type="number" id="customDivisorInput" min="2" max="12" value="3" class="w-20 text-center py-1.5 px-2 rounded-xl border-2 border-purple-400 text-black font-black math-num bg-white">
+                    </div>
+                    <button onclick="applyCustomVisualQuestion()" class="btn-3d bg-purple-500 hover:bg-purple-600 text-white font-bold px-4 py-1.5 rounded-xl text-sm">
+                        ✔️ اعمال عدد
+                    </button>
+                </div>
 
-                <!-- انبار آیتم‌های تقسیم‌نشده -->
-                <div class="mt-5 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-4">
-                    <div class="flex justify-between items-center mb-3">
+                <!-- صورت مسئله -->
+                <div class="mt-4">
+                    <h2 id="visualStoryText" class="text-xl sm:text-2xl md:text-3xl font-black text-black leading-relaxed">
+                        می‌خواهیم ۱۷ سیب سرخ را به طور مساوی در ۳ سبد تقسیم کنیم.
+                    </h2>
+                    <p class="text-black text-xs sm:text-sm mt-2 font-semibold flex items-center gap-2">
+                        <span>💡</span>
+                        <span>ابتدا بزرگ‌ترین بسته‌ها (هزارتایی، سپس صدتایی، ده‌تایی و تکی) را بین سبدها تقسیم کنید. اگر بسته‌ای به همه نرسید، آن را <strong>خُرد (باز)</strong> کنید!</span>
+                    </p>
+                </div>
+
+                <!-- انبار آیتم‌های تقسیم‌نشده به تفکیک ارزش مکانی -->
+                <div class="mt-5 bg-slate-50 border-2 border-dashed border-slate-400 rounded-2xl p-4 text-black">
+                    <div class="flex flex-wrap justify-between items-center gap-2 mb-3 border-b border-slate-200 pb-2">
                         <span class="font-extrabold text-black text-base sm:text-lg">
-                            📦 سبد اصلی (باقی‌مانده فعلی: <span id="poolCountDisplay" class="text-black text-xl font-black math-num">۱۷</span>)
+                            📦 مخزن مرکزی (مقدار باقی‌مانده کل: <span id="poolTotalValueDisplay" class="text-black text-xl font-black math-num underline">۱۷</span>)
                         </span>
-                        <button onclick="resetVisualBaskets()" class="text-xs sm:text-sm text-black hover:underline font-bold">
-                            برگرداندن همه به انبار ↩️
+                        <button onclick="resetVisualBaskets()" class="text-xs sm:text-sm text-black bg-white px-3 py-1 rounded-xl border border-slate-300 hover:bg-slate-100 font-bold">
+                            برگرداندن همه به مخزن ↩️
                         </button>
                     </div>
-                    <div id="itemPool" class="flex flex-wrap gap-2.5 min-h-[64px] items-center justify-center p-2">
-                        <!-- آیتم‌ها توسط جاوااسکریپت اینجا ساخته می‌شوند -->
+
+                    <!-- دکمه‌های سریع توزیع مساوی و خُرد کردن بسته‌ها -->
+                    <div id="placeValueControls" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
+                        <!-- دکمه‌های کنترلی هر ارزش مکانی اینجا ساخته می‌شوند -->
+                    </div>
+
+                    <!-- نمایش بصری بسته‌ها در مخزن مرکزی -->
+                    <div id="itemPool" class="space-y-2.5 min-h-[70px] p-2">
+                        <!-- بسته‌ها و تکی‌ها توسط جاوااسکریپت اینجا ساخته می‌شوند -->
                     </div>
                 </div>
 
                 <!-- سبدهای مقصد -->
-                <div id="basketsContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-6">
+                <div id="basketsContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 mt-6">
                     <!-- سبدها اینجا رندر می‌شوند -->
                 </div>
 
                 <!-- بخش ثبت پاسخ نهایی برای حالت بصری -->
-                <div class="mt-6 bg-gradient-to-l from-indigo-50 to-sky-50 p-4 sm:p-5 rounded-2xl border-2 border-sky-200 flex flex-wrap items-center justify-center gap-4 text-lg sm:text-xl font-black text-black">
-                    <div dir="ltr" class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-300 text-black">
+                <div class="mt-6 bg-gradient-to-l from-indigo-50 to-sky-50 p-4 sm:p-5 rounded-2xl border-2 border-sky-300 flex flex-wrap items-center justify-center gap-4 text-lg sm:text-xl font-black text-black">
+                    <div dir="ltr" class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-400 text-black">
                         <span id="visDividendLabel" class="text-black math-num">۱۷</span>
                         <span>÷</span>
                         <span id="visDivisorLabel" class="text-black math-num">۳</span>
@@ -194,12 +224,12 @@
 
                     <div class="flex items-center gap-2">
                         <label for="visQuotientInput" class="text-black">سهم هر سبد (خارج‌قسمت):</label>
-                        <input type="number" id="visQuotientInput" min="0" max="99" placeholder="؟" class="w-20 text-center py-2 px-3 rounded-xl border-2 border-emerald-500 text-black focus:outline-none focus:ring-4 focus:ring-emerald-200 text-2xl font-black math-num">
+                        <input type="number" id="visQuotientInput" min="0" max="9999" placeholder="؟" class="w-24 text-center py-2 px-3 rounded-xl border-2 border-emerald-600 text-black bg-white focus:outline-none focus:ring-4 focus:ring-emerald-200 text-2xl font-black math-num">
                     </div>
 
                     <div class="flex items-center gap-2">
                         <label for="visRemainderInput" class="text-black">باقی‌مانده:</label>
-                        <input type="number" id="visRemainderInput" min="0" max="99" placeholder="؟" class="w-20 text-center py-2 px-3 rounded-xl border-2 border-rose-500 text-black focus:outline-none focus:ring-4 focus:ring-rose-200 text-2xl font-black math-num">
+                        <input type="number" id="visRemainderInput" min="0" max="99" placeholder="؟" class="w-20 text-center py-2 px-3 rounded-xl border-2 border-rose-600 text-black bg-white focus:outline-none focus:ring-4 focus:ring-rose-200 text-2xl font-black math-num">
                     </div>
 
                     <button onclick="checkVisualAnswer()" class="btn-3d bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3 rounded-2xl text-lg shadow-md">
@@ -372,17 +402,35 @@
 
     <script>
         // ==================== مدیریت وضعیت بازی و متغیرها ====================
+        const GFX = {
+            thousand: '<span class="relative inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 select-none"><span class="text-4xl sm:text-5xl leading-none">🧊</span><span class="absolute text-[10px] sm:text-xs font-black text-purple-950 bg-white/90 px-1 rounded shadow-sm border border-purple-300 leading-none">۱۰۰۰</span></span>',
+            hundred: '<span class="relative inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 select-none"><span class="text-3xl sm:text-4xl leading-none">🟦</span><span class="absolute text-[10px] sm:text-xs font-black text-sky-950 bg-white/90 px-1 rounded shadow-sm border border-sky-300 leading-none">۱۰۰</span></span>',
+            ten: '<span class="relative inline-flex flex-col items-center justify-between w-5 h-14 sm:w-6 sm:h-16 bg-gradient-to-b from-emerald-400 to-emerald-600 rounded-md border-2 border-emerald-900 shadow-sm overflow-hidden select-none" title="بسته ده‌تایی"><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1 border-b border-emerald-200/60"></span><span class="w-full flex-1"></span><span class="absolute inset-0 flex items-center justify-center"><span class="text-[10px] sm:text-xs font-black text-emerald-950 bg-white/95 px-1 rounded shadow-sm border border-emerald-400 leading-tight">۱۰</span></span></span>',
+            apple: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🍎</span>',
+            orange: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🍊</span>',
+            strawberry: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🍓</span>',
+            coin: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🪙</span>',
+            star: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">⭐</span>',
+            gem: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">💎</span>',
+            candy: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🍬</span>',
+            cupcake: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🧁</span>',
+            pencil: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">✏️</span>',
+            flower: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🌻</span>',
+            basket: '<span class="inline-flex items-center justify-center text-2xl sm:text-3xl leading-none select-none">🧺</span>'
+        };
+
         let state = {
             mode: 'visual', // 'visual', 'challenge', 'multiply'
             score: 0,
             correctCount: 0,
             soundEnabled: true,
-            // وضعیت بخش بصری
+            // وضعیت بخش بصری و ارزش مکانی
+            visPreset: 'small', // 'small', 'medium', 'large'
             visDividend: 17,
             visDivisor: 3,
-            visTheme: { icon: '🍎', name: 'سیب قرمز' },
-            visPoolCount: 17,
-            visBaskets: [0, 0, 0],
+            visTheme: { icon: GFX.apple, name: 'سیب سرخ' },
+            visPool: { thousands: 0, hundreds: 0, tens: 0, ones: 17 },
+            visBaskets: [], // آرایه‌ای از آبجکت‌های { thousands, hundreds, tens, ones }
             visSolved: false,
             // وضعیت بخش چالش تقسیم
             difficulty: '2digit', // '2digit', '3digit', '3by2digit', '4by2digit'
@@ -396,49 +444,47 @@
             multSolved: false
         };
 
-        // تم‌های کودک‌پسند برای بخش بصری
         const visualThemes = [
-            { icon: '🍎', name: 'سیب قرمز' },
-            { icon: '🪙', name: 'سکه طلا' },
-            { icon: '🍓', name: 'توت‌فرنگی' },
-            { icon: '🍪', name: 'کلوچه' },
-            { icon: '⚽', name: 'توپ فوتبال' },
-            { icon: '💎', name: 'الماس' }
+            { icon: GFX.apple, name: 'سیب سرخ' },
+            { icon: GFX.orange, name: 'پرتقال' },
+            { icon: GFX.strawberry, name: 'توت‌فرنگی' },
+            { icon: GFX.coin, name: 'سکه طلا' },
+            { icon: GFX.star, name: 'ستاره طلایی' },
+            { icon: GFX.gem, name: 'الماس آبی' },
+            { icon: GFX.candy, name: 'آبنبات' },
+            { icon: GFX.cupcake, name: 'کیک فنجانی' },
+            { icon: GFX.pencil, name: 'مداد' },
+            { icon: GFX.flower, name: 'گل آفتابگردان' }
         ];
 
-        // تبدیل اعداد انگلیسی به فارسی برای نمایش زیبا
+        // تبدیل اعداد انگلیسی به فارسی
         function toPersianDigits(num) {
-            const persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-            return num.toString().replace(/\d/g, x => persian[x]);
+            const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return num.toString().replace(/\d/g, x => persianDigits[x]);
         }
 
-        // ==================== سیستم افکت صوتی با Web Audio API ====================
+        // تولید افکت‌های صوتی بدون نیاز به فایل خارجی (Web Audio API)
         let audioCtx = null;
-
         function playSound(type) {
             if (!state.soundEnabled) return;
             try {
                 if (!audioCtx) {
-                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                    if (AudioContextClass) {
-                        audioCtx = new AudioContextClass();
-                    }
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
-                if (!audioCtx) return;
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
 
-                const now = audioCtx.currentTime;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
 
                 if (type === 'pop') {
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(520, now);
-                    osc.frequency.exponentialRampToValueAtTime(780, now + 0.08);
+                    osc.frequency.exponentialRampToValueAtTime(760, now + 0.08);
                     gain.gain.setValueAtTime(0.15, now);
                     gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
                     osc.start(now);
@@ -449,9 +495,9 @@
                     osc.frequency.setValueAtTime(659.25, now + 0.1);
                     osc.frequency.setValueAtTime(783.99, now + 0.2);
                     gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
                     osc.start(now);
-                    osc.stop(now + 0.4);
+                    osc.stop(now + 0.45);
                 } else if (type === 'error') {
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(220, now);
@@ -462,7 +508,7 @@
                     osc.stop(now + 0.25);
                 }
             } catch (e) {
-                // نادیده گرفتن خطای صدا در مرورگرهای محدود
+                // نادیده گرفتن خطا در مرورگرهای محدود
             }
         }
 
@@ -471,50 +517,13 @@
             document.getElementById('soundToggleBtn').textContent = state.soundEnabled ? '🔊' : '🔇';
         }
 
-        // ==================== جابه‌جایی بین سه حالت بازی ====================
-        function switchMode(mode) {
-            state.mode = mode;
-            hideFeedback();
-
-            const tabVisual = document.getElementById('tabVisual');
-            const tabChallenge = document.getElementById('tabChallenge');
-            const tabMultiply = document.getElementById('tabMultiply');
-
-            const visualSec = document.getElementById('visualSection');
-            const challengeSec = document.getElementById('challengeSection');
-            const multiplySec = document.getElementById('multiplySection');
-
-            // بازنشانی استایل همه تب‌ها و پنهان کردن بخش‌ها
-            const inactiveClass = 'btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 border-2 border-slate-200';
-            tabVisual.className = inactiveClass;
-            tabChallenge.className = inactiveClass;
-            tabMultiply.className = inactiveClass;
-
-            visualSec.classList.add('hidden');
-            challengeSec.classList.add('hidden');
-            multiplySec.classList.add('hidden');
-
-            if (mode === 'visual') {
-                tabVisual.className = 'btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-amber-400 text-black border-2 border-amber-500';
-                visualSec.classList.remove('hidden');
-            } else if (mode === 'challenge') {
-                tabChallenge.className = 'btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-sky-500 text-white border-2 border-sky-600';
-                challengeSec.classList.remove('hidden');
-            } else if (mode === 'multiply') {
-                tabMultiply.className = 'btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-purple-600 text-white border-2 border-purple-700';
-                multiplySec.classList.remove('hidden');
-            }
-        }
-
-        // ==================== نمایش پیام بازخورد و امتیازدهی ====================
-        function showFeedback(message, type) {
+        function showFeedback(message, isSuccess) {
             const banner = document.getElementById('feedbackBanner');
-            banner.classList.remove('hidden', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'bg-rose-100', 'border-rose-500', 'text-rose-900', 'animate-shake');
-
-            if (type === 'success') {
-                banner.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+            banner.classList.remove('hidden', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-950', 'bg-rose-100', 'border-rose-500', 'text-rose-950', 'animate-shake');
+            if (isSuccess) {
+                banner.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-950');
             } else {
-                banner.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900', 'animate-shake');
+                banner.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-950', 'animate-shake');
             }
             banner.innerHTML = message;
         }
@@ -523,199 +532,337 @@
             document.getElementById('feedbackBanner').classList.add('hidden');
         }
 
-        function addScore(points) {
+        function updateScore(points) {
             state.score += points;
             state.correctCount += 1;
             document.getElementById('scoreDisplay').textContent = toPersianDigits(state.score);
             document.getElementById('streakDisplay').textContent = toPersianDigits(state.correctCount);
-
-            const progress = Math.min(100, 10 + state.correctCount * 10);
-            document.getElementById('progressBar').style.width = progress + '%';
-
+            const progress = Math.min(100, 10 + (state.correctCount * 10));
+            document.getElementById('progressBar').style.width = `${progress}%`;
             if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 75,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
+                confetti({ particleCount: 65, spread: 60, origin: { y: 0.7 } });
             }
         }
 
-        // ==================== منطق بخش ۱: آزمایشگاه بصری و دسته‌بندی ====================
-        function initVisualQuestion() {
+        // ==================== جابه‌جایی بین تب‌های اصلی ====================
+        function switchMode(newMode) {
+            state.mode = newMode;
             hideFeedback();
-            state.visSolved = false;
-            state.visDivisor = Math.floor(Math.random() * 4) + 2; // بین ۲ تا ۵ سبد
-            const targetQuotient = Math.floor(Math.random() * 5) + 2; // بین ۲ تا ۶ سهم
-            const targetRemainder = Math.floor(Math.random() * state.visDivisor); // باقی‌مانده کمتر از مقسوم‌علیه
-            state.visDividend = state.visDivisor * targetQuotient + targetRemainder;
+
+            const tabs = {
+                visual: { btn: document.getElementById('tabVisual'), sec: document.getElementById('visualSection'), active: 'bg-amber-400 text-black border-amber-500' },
+                challenge: { btn: document.getElementById('tabChallenge'), sec: document.getElementById('challengeSection'), active: 'bg-sky-500 text-white border-sky-600' },
+                multiply: { btn: document.getElementById('tabMultiply'), sec: document.getElementById('multiplySection'), active: 'bg-purple-500 text-white border-purple-600' }
+            };
+
+            Object.keys(tabs).forEach(key => {
+                const item = tabs[key];
+                if (key === newMode) {
+                    item.sec.classList.remove('hidden');
+                    item.btn.className = `btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 border-2 ${item.active}`;
+                } else {
+                    item.sec.classList.add('hidden');
+                    item.btn.className = 'btn-3d py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 border-2 border-slate-200';
+                }
+            });
+        }
+
+        // ==================== منطق بخش ۱: آزمایشگاه تقسیم و ارزش مکانی ====================
+        function setVisPreset(preset) {
+            state.visPreset = preset;
+            const btns = {
+                small: document.getElementById('visPresetSmall'),
+                medium: document.getElementById('visPresetMedium'),
+                large: document.getElementById('visPresetLarge')
+            };
+            Object.keys(btns).forEach(k => {
+                if (k === preset) {
+                    btns[k].className = 'px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-amber-500 text-black border border-amber-600 shadow-sm';
+                } else {
+                    btns[k].className = 'px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-black hover:bg-slate-200 border border-slate-300';
+                }
+            });
+            initVisualQuestion();
+        }
+
+        function toggleCustomVisModal() {
+            document.getElementById('customVisBox').classList.toggle('hidden');
+        }
+
+        function applyCustomVisualQuestion() {
+            const divd = parseInt(document.getElementById('customDividendInput').value, 10);
+            const divs = parseInt(document.getElementById('customDivisorInput').value, 10);
+            if (isNaN(divd) || divd < 2 || divd > 9999) {
+                showFeedback('⚠️ لطفاً برای مقسوم عددی بین ۲ تا ۹۹۹۹ وارد کنید.', false);
+                return;
+            }
+            if (isNaN(divs) || divs < 2 || divs > 12) {
+                showFeedback('⚠️ لطفاً تعداد سبد را بین ۲ تا ۱۲ انتخاب کنید.', false);
+                return;
+            }
+            state.visDividend = divd;
+            state.visDivisor = divs;
+            document.getElementById('customVisBox').classList.add('hidden');
+            setupVisualState();
+        }
+
+        function initVisualQuestion() {
+            let dividend, divisor;
+            if (state.visPreset === 'small') {
+                divisor = Math.floor(Math.random() * 4) + 2; // 2 تا 5
+                dividend = Math.floor(Math.random() * 18) + (divisor * 2) + 1; // تا حدود 28
+            } else if (state.visPreset === 'medium') {
+                divisor = Math.floor(Math.random() * 5) + 2; // 2 تا 6
+                dividend = Math.floor(Math.random() * 350) + 45; // 45 تا 394
+            } else {
+                divisor = Math.floor(Math.random() * 6) + 2; // 2 تا 7
+                dividend = Math.floor(Math.random() * 3200) + 1150; // 1150 تا 4349
+            }
+            state.visDividend = dividend;
+            state.visDivisor = divisor;
             state.visTheme = visualThemes[Math.floor(Math.random() * visualThemes.length)];
+            setupVisualState();
+        }
 
-            state.visPoolCount = state.visDividend;
-            state.visBaskets = new Array(state.visDivisor).fill(0);
+        function decomposeNumber(num) {
+            return {
+                thousands: Math.floor(num / 1000),
+                hundreds: Math.floor((num % 1000) / 100),
+                tens: Math.floor((num % 100) / 10),
+                ones: num % 10
+            };
+        }
 
+        function setupVisualState() {
+            state.visSolved = false;
+            hideFeedback();
             document.getElementById('visQuotientInput').value = '';
             document.getElementById('visRemainderInput').value = '';
+
+            // برای اعداد کوچک تا ۳۰، همه را به صورت تکی نمایش می‌دهیم تا لمس اولیه ساده‌تر باشد
+            if (state.visDividend <= 30) {
+                state.visPool = { thousands: 0, hundreds: 0, tens: 0, ones: state.visDividend };
+            } else {
+                state.visPool = decomposeNumber(state.visDividend);
+            }
+
+            state.visBaskets = Array.from({ length: state.visDivisor }, () => ({
+                thousands: 0,
+                hundreds: 0,
+                tens: 0,
+                ones: 0
+            }));
+
+            document.getElementById('visualStoryText').innerHTML =
+                `می‌خواهیم <span class="underline decoration-amber-500 decoration-4 math-num">${toPersianDigits(state.visDividend)}</span> ${state.visTheme.name} را به طور مساوی در <span class="underline decoration-sky-500 decoration-4 math-num">${toPersianDigits(state.visDivisor)}</span> سبد تقسیم کنیم.`;
             document.getElementById('visDividendLabel').textContent = toPersianDigits(state.visDividend);
             document.getElementById('visDivisorLabel').textContent = toPersianDigits(state.visDivisor);
-            document.getElementById('visualStoryText').textContent =
-                `می‌خواهیم ${toPersianDigits(state.visDividend)} ${state.visTheme.name} را به طور مساوی در ${toPersianDigits(state.visDivisor)} سبد تقسیم کنیم.`;
 
             renderVisualLab();
         }
 
         function resetVisualBaskets() {
-            state.visPoolCount = state.visDividend;
-            state.visBaskets = new Array(state.visDivisor).fill(0);
             playSound('pop');
+            setupVisualState();
+        }
+
+        // توزیع یک دسته به هر سبد (به صورت مساوی)
+        function distributeRound(unitType) {
+            if (state.visPool[unitType] < state.visDivisor) {
+                playSound('error');
+                showFeedback(`⚠️ تعداد این بسته در مخزن (${toPersianDigits(state.visPool[unitType])}) از تعداد سبدها (${toPersianDigits(state.visDivisor)}) کمتر است! می‌توانید آن را خُرد (باز) کنید.`, false);
+                return;
+            }
+            playSound('pop');
+            hideFeedback();
+            state.visPool[unitType] -= state.visDivisor;
+            state.visBaskets.forEach(b => b[unitType] += 1);
             renderVisualLab();
         }
 
+        // خُرد کردن یک بسته بزرگ به ۱۰ بسته کوچک‌تر
+        function unpackUnit(unitType) {
+            if (state.visPool[unitType] <= 0) return;
+            playSound('pop');
+            hideFeedback();
+            state.visPool[unitType] -= 1;
+            if (unitType === 'thousands') state.visPool.hundreds += 10;
+            else if (unitType === 'hundreds') state.visPool.tens += 10;
+            else if (unitType === 'tens') state.visPool.ones += 10;
+            renderVisualLab();
+        }
+
+        // انتقال تکی یک آیتم از مخزن به اولین سبدی که کمترین مقدار را دارد یا سبد مشخص
+        function addSingleToBasket(basketIndex, unitType) {
+            if (state.visPool[unitType] <= 0) return;
+            playSound('pop');
+            hideFeedback();
+            state.visPool[unitType] -= 1;
+            state.visBaskets[basketIndex][unitType] += 1;
+            renderVisualLab();
+        }
+
+        // برگرداندن یک آیتم از سبد به مخزن
+        function returnFromBasket(basketIndex, unitType) {
+            if (state.visBaskets[basketIndex][unitType] <= 0) return;
+            playSound('pop');
+            hideFeedback();
+            state.visBaskets[basketIndex][unitType] -= 1;
+            state.visPool[unitType] += 1;
+            renderVisualLab();
+        }
+
+        function calcTotal(obj) {
+            return (obj.thousands * 1000) + (obj.hundreds * 100) + (obj.tens * 10) + obj.ones;
+        }
+
         function renderVisualLab() {
-            document.getElementById('poolCountDisplay').textContent = toPersianDigits(state.visPoolCount);
+            const totalRemaining = calcTotal(state.visPool);
+            document.getElementById('poolTotalValueDisplay').textContent = toPersianDigits(totalRemaining);
 
-            // رندر آیتم‌های انبار
-            const poolEl = document.getElementById('itemPool');
-            poolEl.innerHTML = '';
-            for (let i = 0; i < state.visPoolCount; i++) {
-                const item = document.createElement('button');
-                item.type = 'button';
-                item.draggable = true;
-                item.className = 'text-3xl sm:text-4xl p-1.5 bg-white rounded-2xl shadow hover:scale-110 active:scale-95 transition cursor-pointer animate-float border border-slate-200';
-                item.style.animationDelay = (i * 0.1) + 's';
-                item.textContent = state.visTheme.icon;
-                item.title = 'کلیک کنید تا به سبد با کمترین تعداد برود';
+            // ۱. رندر دکمه‌های کنترلی ارزش مکانی
+            const controlsContainer = document.getElementById('placeValueControls');
+            const unitMeta = [
+                { key: 'thousands', label: 'بسته هزارتایی', icon: GFX.thousand, nextLabel: 'صدتایی', bg: 'bg-purple-100 border-purple-400' },
+                { key: 'hundreds', label: 'بسته صدتایی', icon: GFX.hundred, nextLabel: 'ده‌تایی', bg: 'bg-sky-100 border-sky-400' },
+                { key: 'tens', label: 'بسته ده‌تایی', icon: GFX.ten, nextLabel: 'تکی', bg: 'bg-emerald-100 border-emerald-400' },
+                { key: 'ones', label: `واحد تکی (${state.visTheme.name})`, icon: state.visTheme.icon, nextLabel: null, bg: 'bg-amber-100 border-amber-400' }
+            ];
 
-                // با کلیک، آیتم به سبدی می‌رود که کمترین عضو را دارد (توزیع عادلانه)
-                item.onclick = () => {
-                    let minIdx = 0;
-                    for (let b = 1; b < state.visBaskets.length; b++) {
-                        if (state.visBaskets[b] < state.visBaskets[minIdx]) {
-                            minIdx = b;
-                        }
-                    }
-                    moveItemToBasket(minIdx);
-                };
-
-                item.ondragstart = (e) => {
-                    e.dataTransfer.setData('text/plain', 'pool-item');
-                };
-
-                poolEl.appendChild(item);
-            }
-
-            // رندر سبدها
-            const basketsEl = document.getElementById('basketsContainer');
-            basketsEl.innerHTML = '';
-            state.visBaskets.forEach((count, idx) => {
-                const basket = document.createElement('div');
-                basket.className = 'basket-zone bg-amber-50/90 border-3 border-amber-400 rounded-3xl p-4 flex flex-col items-center justify-between min-h-[160px] shadow-md';
-
-                basket.ondragover = (e) => {
-                    e.preventDefault();
-                    basket.classList.add('drag-over');
-                };
-                basket.ondragleave = () => basket.classList.remove('drag-over');
-                basket.ondrop = (e) => {
-                    e.preventDefault();
-                    basket.classList.remove('drag-over');
-                    moveItemToBasket(idx);
-                };
-
-                // هدر سبد
-                const header = document.createElement('div');
-                header.className = 'w-full flex items-center justify-between border-b border-amber-200 pb-2 mb-2 text-black font-black';
-                header.innerHTML = `
-                    <span class="text-sm sm:text-base">🧺 سبد ${toPersianDigits(idx + 1)}</span>
-                    <span class="bg-amber-300 text-black px-2.5 py-0.5 rounded-full text-sm math-num">${toPersianDigits(count)}</span>
+            let controlsHtml = '';
+            unitMeta.forEach(u => {
+                const count = state.visPool[u.key];
+                const canDistribute = count >= state.visDivisor;
+                const canUnpack = u.nextLabel && count > 0;
+                controlsHtml += `
+                    <div class="${u.bg} border-2 rounded-2xl p-3 flex flex-col justify-between gap-2 text-black">
+                        <div class="flex items-center justify-between">
+                            <span class="font-black text-xs sm:text-sm flex items-center gap-1.5">${u.icon} ${u.label}</span>
+                            <span class="bg-white px-2.5 py-0.5 rounded-lg font-black text-sm border border-slate-300 math-num">${toPersianDigits(count)} عدد</span>
+                        </div>
+                        <div class="flex gap-1.5">
+                            <button onclick="distributeRound('${u.key}')" ${!canDistribute ? 'disabled' : ''} class="flex-1 py-1.5 px-2 rounded-xl font-bold text-xs transition ${canDistribute ? 'bg-white hover:bg-slate-100 text-black border border-slate-400 shadow-sm cursor-pointer' : 'bg-white/40 text-slate-400 border border-slate-200 cursor-not-allowed'}">
+                                ➕ ۱ به هر سبد
+                            </button>
+                            ${u.nextLabel ? `
+                                <button onclick="unpackUnit('${u.key}')" ${!canUnpack ? 'disabled' : ''} class="py-1.5 px-2 rounded-xl font-bold text-xs transition ${canUnpack ? 'bg-amber-300 hover:bg-amber-400 text-black border border-amber-500 shadow-sm cursor-pointer' : 'bg-white/40 text-slate-400 border border-slate-200 cursor-not-allowed'}" title="باز کردن ۱ بسته به ۱۰ ${u.nextLabel}">
+                                    🔨 خُرد کردن
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
                 `;
-
-                // محتویات داخل سبد
-                const itemsWrap = document.createElement('div');
-                itemsWrap.className = 'flex flex-wrap gap-1.5 justify-center items-center my-2 min-h-[56px]';
-                for (let k = 0; k < count; k++) {
-                    const miniItem = document.createElement('button');
-                    miniItem.type = 'button';
-                    miniItem.className = 'text-2xl sm:text-3xl hover:scale-110 transition cursor-pointer';
-                    miniItem.textContent = state.visTheme.icon;
-                    miniItem.title = 'کلیک برای برگرداندن به انبار';
-                    miniItem.onclick = () => removeItemFromBasket(idx);
-                    itemsWrap.appendChild(miniItem);
-                }
-
-                // دکمه افزودن مستقیم به این سبد
-                const addBtn = document.createElement('button');
-                addBtn.type = 'button';
-                addBtn.className = 'w-full mt-2 py-1.5 bg-amber-200 hover:bg-amber-300 text-black font-bold rounded-xl text-xs sm:text-sm transition';
-                addBtn.textContent = '➕ گذاشتن در این سبد';
-                addBtn.onclick = () => moveItemToBasket(idx);
-
-                basket.appendChild(header);
-                basket.appendChild(itemsWrap);
-                basket.appendChild(addBtn);
-                basketsEl.appendChild(basket);
             });
-        }
+            controlsContainer.innerHTML = controlsHtml;
 
-        function moveItemToBasket(basketIdx) {
-            if (state.visPoolCount > 0) {
-                state.visPoolCount--;
-                state.visBaskets[basketIdx]++;
-                playSound('pop');
-                renderVisualLab();
-            }
-        }
-
-        function removeItemFromBasket(basketIdx) {
-            if (state.visBaskets[basketIdx] > 0) {
-                state.visBaskets[basketIdx]--;
-                state.visPoolCount++;
-                playSound('pop');
-                renderVisualLab();
-            }
-        }
-
-        function autoDistributeStep() {
-            if (state.visPoolCount >= state.visDivisor) {
-                for (let i = 0; i < state.visDivisor; i++) {
-                    state.visPoolCount--;
-                    state.visBaskets[i]++;
-                }
-                playSound('pop');
-                renderVisualLab();
+            // ۲. رندر آیتم‌های داخل مخزن مرکزی (فقط شکل خالص بدون عدد کنار آیکون)
+            const poolDiv = document.getElementById('itemPool');
+            if (totalRemaining === 0) {
+                poolDiv.innerHTML = '<div class="text-center py-3 font-bold text-black text-sm">🎉 تمام بسته‌ها و آیتم‌ها بین سبدها تقسیم شدند! (باقی‌مانده = ۰)</div>';
             } else {
-                showFeedback('⚠️ تعداد باقی‌مانده در انبار از تعداد سبدها کمتر است و دیگر نمی‌توان یک دور مساوی تقسیم کرد!', 'error');
-                playSound('error');
+                let poolHtml = '<div class="flex flex-wrap gap-2 items-center justify-center">';
+                const renderIcons = (count, iconHtml, unitKey) => {
+                    const maxShow = Math.min(count, 35);
+                    for (let i = 0; i < maxShow; i++) {
+                        poolHtml += `<button onclick="autoDistributeOne('${unitKey}')" class="p-1.5 bg-white hover:bg-amber-100 rounded-xl border border-slate-300 shadow-sm transition transform hover:scale-110" title="کلیک برای قرار دادن در سبد">${iconHtml}</button>`;
+                    }
+                    if (count > maxShow) {
+                        poolHtml += `<span class="text-xs font-black bg-white px-2 py-1 rounded-lg border border-slate-300 text-black">... (${toPersianDigits(count - maxShow)} مورد دیگر)</span>`;
+                    }
+                };
+                renderIcons(state.visPool.thousands, GFX.thousand, 'thousands');
+                renderIcons(state.visPool.hundreds, GFX.hundred, 'hundreds');
+                renderIcons(state.visPool.tens, GFX.ten, 'tens');
+                renderIcons(state.visPool.ones, state.visTheme.icon, 'ones');
+                poolHtml += '</div>';
+                poolDiv.innerHTML = poolHtml;
             }
+
+            // ۳. رندر سبدها با نمایش عینی شکل‌ها داخل هر سبد
+            const basketsContainer = document.getElementById('basketsContainer');
+            let basketsHtml = '';
+            state.visBaskets.forEach((basket, idx) => {
+                const basketTotal = calcTotal(basket);
+                let itemsInside = '';
+
+                const addBasketVisualItems = (count, iconHtml, unitKey) => {
+                    const showLimit = Math.min(count, 25);
+                    for (let i = 0; i < showLimit; i++) {
+                        itemsInside += `<button onclick="returnFromBasket(${idx}, '${unitKey}')" class="p-0.5 hover:scale-110 transition" title="کلیک برای بازگرداندن به مخزن">${iconHtml}</button>`;
+                    }
+                    if (count > showLimit) {
+                        itemsInside += `<span class="text-xs font-bold text-black">+${toPersianDigits(count - showLimit)}</span>`;
+                    }
+                };
+
+                addBasketVisualItems(basket.thousands, GFX.thousand, 'thousands');
+                addBasketVisualItems(basket.hundreds, GFX.hundred, 'hundreds');
+                addBasketVisualItems(basket.tens, GFX.ten, 'tens');
+                addBasketVisualItems(basket.ones, state.visTheme.icon, 'ones');
+
+                basketsHtml += `
+                    <div class="basket-zone bg-amber-50 border-2 border-amber-400 rounded-2xl p-3 flex flex-col justify-between min-h-[145px] shadow-sm text-black">
+                        <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 mb-2">
+                            <span class="font-black text-xs sm:text-sm flex items-center gap-1 text-black">${GFX.basket} سبد ${toPersianDigits(idx + 1)}</span>
+                            <span class="bg-white px-2 py-0.5 rounded-lg text-xs font-black border border-amber-300 text-black math-num">${toPersianDigits(basketTotal)}</span>
+                        </div>
+                        <div class="flex flex-wrap gap-1 items-center justify-center flex-grow py-1">
+                            ${itemsInside || '<span class="text-xs text-slate-500 font-semibold">خالی</span>'}
+                        </div>
+                    </div>
+                `;
+            });
+            basketsContainer.innerHTML = basketsHtml;
+        }
+
+        // قرار دادن یک آیتم از مخزن در سبدی که کمترین مقدار را دارد
+        function autoDistributeOne(unitKey) {
+            if (state.visPool[unitKey] <= 0) return;
+            let minIdx = 0;
+            let minVal = calcTotal(state.visBaskets[0]);
+            for (let i = 1; i < state.visBaskets.length; i++) {
+                const v = calcTotal(state.visBaskets[i]);
+                if (v < minVal) {
+                    minVal = v;
+                    minIdx = i;
+                }
+            }
+            addSingleToBasket(minIdx, unitKey);
         }
 
         function checkVisualAnswer() {
-            const qVal = parseInt(document.getElementById('visQuotientInput').value, 10);
-            const rVal = parseInt(document.getElementById('visRemainderInput').value, 10);
+            const qInput = parseInt(document.getElementById('visQuotientInput').value, 10);
+            const rInput = parseInt(document.getElementById('visRemainderInput').value, 10);
+
+            if (isNaN(qInput) || isNaN(rInput)) {
+                playSound('error');
+                showFeedback('⚠️ لطفاً هر دو کادر «سهم هر سبد» و «باقی‌مانده» را پر کنید!', false);
+                return;
+            }
 
             const expectedQ = Math.floor(state.visDividend / state.visDivisor);
             const expectedR = state.visDividend % state.visDivisor;
 
-            if (isNaN(qVal) || isNaN(rVal)) {
-                showFeedback('لطفاً هر دو کادر «خارج‌قسمت» و «باقی‌مانده» را پر کنید.', 'error');
-                playSound('error');
-                return;
-            }
-
-            if (qVal === expectedQ && rVal === expectedR) {
+            if (qInput === expectedQ && rInput === expectedR) {
                 playSound('success');
-                showFeedback(`🎉 آفرین! تقسیم کاملاً درست انجام شد: <span dir="ltr" class="inline-block font-black">${toPersianDigits(state.visDividend)} ÷ ${toPersianDigits(state.visDivisor)} = ${toPersianDigits(expectedQ)}</span> و باقی‌مانده <span class="font-black">${toPersianDigits(expectedR)}</span>`, 'success');
+                showFeedback(`🎉 آفرین! کاملاً درست است: <span dir="ltr" class="inline-block font-black math-num">${toPersianDigits(state.visDividend)} ÷ ${toPersianDigits(state.visDivisor)} = ${toPersianDigits(expectedQ)}</span> و باقی‌مانده <span class="font-black math-num">${toPersianDigits(expectedR)}</span>.`, true);
                 if (!state.visSolved) {
                     state.visSolved = true;
-                    addScore(15);
+                    updateScore(20);
                 }
             } else {
                 playSound('error');
-                showFeedback('❌ هنوز دقیق نیست! تعداد آیتم‌های داخل هر سبد (خارج‌قسمت) و آیتم‌های باقی‌مانده در انبار را دوباره بشمار.', 'error');
+                let hint = '❌ پاسخ دقیق نیست. ';
+                if (rInput >= state.visDivisor) {
+                    hint += `دقت کن! باقی‌مانده (${toPersianDigits(rInput)}) نباید از تعداد سبدها (${toPersianDigits(state.visDivisor)}) بیشتر یا مساوی باشد.`;
+                } else {
+                    hint += 'بسته‌های داخل هر سبد و مقدار باقی‌مانده در مخزن مرکزی را دوباره بشمار!';
+                }
+                showFeedback(hint, false);
             }
         }
 
-        // ==================== منطق بخش ۲: چالش تقسیم دو تا چهار رقمی ====================
+        // ==================== منطق بخش ۲: چالش تقسیم ====================
         function setDifficulty(level) {
             state.difficulty = level;
             const btns = {
@@ -724,107 +871,102 @@
                 '3by2digit': document.getElementById('diff3by2Btn'),
                 '4by2digit': document.getElementById('diff4by2Btn')
             };
-
-            Object.keys(btns).forEach(key => {
-                if (key === level) {
-                    btns[key].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-sky-600 text-white shadow';
+            Object.keys(btns).forEach(k => {
+                if (k === level) {
+                    btns[k].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-sky-600 text-white shadow';
                 } else {
-                    btns[key].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200';
+                    btns[k].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200';
                 }
             });
             generateChallengeQuestion();
         }
 
         function generateChallengeQuestion() {
-            hideFeedback();
             state.chalSolved = false;
-            document.getElementById('stepHintBox').classList.add('hidden');
+            hideFeedback();
             document.getElementById('chalQuotientInput').value = '';
             document.getElementById('chalRemainderInput').value = '';
+            document.getElementById('stepHintBox').classList.add('hidden');
 
+            let dividend, divisor;
             if (state.difficulty === '2digit') {
-                state.chalDivisor = Math.floor(Math.random() * 8) + 2; // ۲ تا ۹
-                state.chalDividend = Math.floor(Math.random() * 85) + 14; // ۱۴ تا ۹۸
+                divisor = Math.floor(Math.random() * 7) + 3; // 3 تا 9
+                dividend = Math.floor(Math.random() * 80) + 19; // 19 تا 98
             } else if (state.difficulty === '3digit') {
-                state.chalDivisor = Math.floor(Math.random() * 8) + 2; // ۲ تا ۹
-                state.chalDividend = Math.floor(Math.random() * 850) + 120; // ۱۲۰ تا ۹۶۹
+                divisor = Math.floor(Math.random() * 7) + 3; // 3 تا 9
+                dividend = Math.floor(Math.random() * 850) + 120; // 120 تا 969
             } else if (state.difficulty === '3by2digit') {
-                state.chalDivisor = Math.floor(Math.random() * 78) + 12; // ۱۲ تا ۸۹
-                state.chalDividend = Math.floor(Math.random() * 850) + 135; // ۱۳۵ تا ۹۸۴
+                divisor = Math.floor(Math.random() * 25) + 12; // 12 تا 36
+                dividend = Math.floor(Math.random() * 750) + 180; // 180 تا 929
             } else {
-                // سطح ۴: چهار رقمی بر دو رقمی
-                state.chalDivisor = Math.floor(Math.random() * 84) + 12; // ۱۲ تا ۹۵
-                state.chalDividend = Math.floor(Math.random() * 8500) + 1250; // ۱۲۵۰ تا ۹۷۴۹
+                divisor = Math.floor(Math.random() * 35) + 12; // 12 تا 46
+                dividend = Math.floor(Math.random() * 7800) + 1250; // 1250 تا 9049
             }
 
-            document.getElementById('chalDividend').textContent = toPersianDigits(state.chalDividend);
-            document.getElementById('chalDivisor').textContent = toPersianDigits(state.chalDivisor);
-            document.getElementById('reminderRuleDivisor').textContent = toPersianDigits(state.chalDivisor);
+            state.chalDividend = dividend;
+            state.chalDivisor = divisor;
+
+            document.getElementById('chalDividend').textContent = toPersianDigits(dividend);
+            document.getElementById('chalDivisor').textContent = toPersianDigits(divisor);
+            document.getElementById('reminderRuleDivisor').textContent = toPersianDigits(divisor);
         }
 
         function checkChallengeAnswer() {
-            const qVal = parseInt(document.getElementById('chalQuotientInput').value, 10);
-            const rVal = parseInt(document.getElementById('chalRemainderInput').value, 10);
+            const qInput = parseInt(document.getElementById('chalQuotientInput').value, 10);
+            const rInput = parseInt(document.getElementById('chalRemainderInput').value, 10);
+
+            if (isNaN(qInput) || isNaN(rInput)) {
+                playSound('error');
+                showFeedback('⚠️ لطفاً هر دو کادر «خارج‌قسمت» و «باقی‌مانده» را وارد کنید.', false);
+                return;
+            }
 
             const expectedQ = Math.floor(state.chalDividend / state.chalDivisor);
             const expectedR = state.chalDividend % state.chalDivisor;
 
-            if (isNaN(qVal) || isNaN(rVal)) {
-                showFeedback('لطفاً مقدار خارج‌قسمت و باقی‌مانده را وارد کنید.', 'error');
-                playSound('error');
-                return;
-            }
-
-            if (rVal >= state.chalDivisor) {
-                playSound('error');
-                showFeedback(`⚠️ دقت کن! باقی‌مانده (${toPersianDigits(rVal)}) نباید از مقسوم‌علیه (${toPersianDigits(state.chalDivisor)}) بزرگ‌تر یا مساوی باشد.`, 'error');
-                return;
-            }
-
-            if (qVal === expectedQ && rVal === expectedR) {
+            if (qInput === expectedQ && rInput === expectedR) {
                 playSound('success');
-                showFeedback(`🌟 فوق‌العاده بود! درستی تقسیم: <span dir="ltr" class="inline-block font-black">(${toPersianDigits(state.chalDivisor)} × ${toPersianDigits(expectedQ)}) + ${toPersianDigits(expectedR)} = ${toPersianDigits(state.chalDividend)}</span>`, 'success');
+                const ptsMap = { '2digit': 20, '3digit': 30, '3by2digit': 35, '4by2digit': 45 };
+                showFeedback(`🌟 فوق‌العاده بود! درستی تقسیم: <span dir="ltr" class="inline-block font-black math-num">(${toPersianDigits(state.chalDivisor)} × ${toPersianDigits(expectedQ)}) + ${toPersianDigits(expectedR)} = ${toPersianDigits(state.chalDividend)}</span>`, true);
                 if (!state.chalSolved) {
                     state.chalSolved = true;
-                    const scoreMap = { '2digit': 15, '3digit': 25, '3by2digit': 35, '4by2digit': 45 };
-                    addScore(scoreMap[state.difficulty] || 20);
+                    updateScore(ptsMap[state.difficulty] || 25);
                 }
             } else {
                 playSound('error');
-                showFeedback('پاسخ دقیق نیست! برای دیدن روش حل از دکمه «راهنمای مرحله‌به‌مرحله» کمک بگیر.', 'error');
+                let msg = '❌ پاسخ نادرست است! ';
+                if (rInput >= state.chalDivisor) {
+                    msg += `باقی‌مانده (${toPersianDigits(rInput)}) باید از مقسوم‌علیه (${toPersianDigits(state.chalDivisor)}) کوچک‌تر باشد.`;
+                } else {
+                    const checkVal = (state.chalDivisor * qInput) + rInput;
+                    msg += `اگر <span dir="ltr" class="inline-block math-num">(${toPersianDigits(state.chalDivisor)} × ${toPersianDigits(qInput)}) + ${toPersianDigits(rInput)}</span> را حساب کنیم می‌شود <span class="math-num font-black">${toPersianDigits(checkVal)}</span> که با مقسوم (<span class="math-num font-black">${toPersianDigits(state.chalDividend)}</span>) برابر نیست!`;
+                }
+                showFeedback(msg, false);
             }
         }
 
         function toggleStepByStepHint() {
             const box = document.getElementById('stepHintBox');
-            const content = document.getElementById('stepHintContent');
             box.classList.toggle('hidden');
-
             if (!box.classList.contains('hidden')) {
                 const digits = state.chalDividend.toString().split('').map(Number);
                 const d = state.chalDivisor;
-                let currentVal = 0;
                 let stepsHtml = '';
+                let currentVal = 0;
+                let stepNum = 1;
 
-                digits.forEach((digit, index) => {
-                    currentVal = currentVal * 10 + digit;
+                for (let i = 0; i < digits.length; i++) {
+                    currentVal = currentVal * 10 + digits[i];
+                    if (currentVal < d && i < digits.length - 1 && stepNum === 1) {
+                        stepsHtml += `<p><strong>گام ${toPersianDigits(stepNum++)}:</strong> رقم سمت چپ (${toPersianDigits(currentVal)}) از ${toPersianDigits(d)} کوچک‌تر است؛ پس دو رقم اول را با هم برمی‌داریم.</p>`;
+                        continue;
+                    }
                     const qDigit = Math.floor(currentVal / d);
-                    const prod = qDigit * d;
-                    const rem = currentVal - prod;
-
-                    stepsHtml += `
-                        <div class="bg-white p-3 rounded-2xl border border-indigo-200 shadow-sm">
-                            <span class="font-black text-indigo-700">مرحله ${toPersianDigits(index + 1)}:</span>
-                            عدد <span class="font-black text-sky-700">${toPersianDigits(currentVal)}</span> را بر <span class="font-black text-purple-700">${toPersianDigits(d)}</span> تقسیم می‌کنیم:
-                            در خارج‌قسمت رقم <span class="font-black text-emerald-600">${toPersianDigits(qDigit)}</span> قرار می‌گیرد
-                            (<span dir="ltr" class="inline-block font-bold">${toPersianDigits(qDigit)} × ${toPersianDigits(d)} = ${toPersianDigits(prod)}</span>)
-                            و باقی‌مانده این مرحله <span class="font-black text-rose-600">${toPersianDigits(rem)}</span> می‌شود.
-                        </div>
-                    `;
+                    const rem = currentVal % d;
+                    stepsHtml += `<p><strong>گام ${toPersianDigits(stepNum++)}:</strong> عدد <span class="font-black text-sky-700 math-num">${toPersianDigits(currentVal)}</span> را بر <span class="font-black text-purple-700 math-num">${toPersianDigits(d)}</span> تقسیم می‌کنیم: <span class="font-black text-emerald-700 math-num">${toPersianDigits(qDigit)}</span> تا دارد (<span dir="ltr" class="inline-block math-num">${toPersianDigits(qDigit)} × ${toPersianDigits(d)} = ${toPersianDigits(qDigit * d)}</span>) و باقی‌ماندهٔ این مرحله <span class="font-black text-rose-600 math-num">${toPersianDigits(rem)}</span> می‌شود.</p>`;
                     currentVal = rem;
-                });
-
-                content.innerHTML = stepsHtml;
+                }
+                document.getElementById('stepHintContent').innerHTML = stepsHtml;
             }
         }
 
@@ -837,42 +979,42 @@
                 hard: document.getElementById('multDiffHardBtn'),
                 super: document.getElementById('multDiffSuperBtn')
             };
-
-            Object.keys(btns).forEach(key => {
-                if (key === level) {
-                    btns[key].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-purple-600 text-white shadow';
+            Object.keys(btns).forEach(k => {
+                if (k === level) {
+                    btns[k].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-purple-600 text-white shadow';
                 } else {
-                    btns[key].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200';
+                    btns[k].className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200';
                 }
             });
-
             generateMultiplyQuestion();
         }
 
         function generateMultiplyQuestion() {
-            hideFeedback();
             state.multSolved = false;
-            document.getElementById('multHintBox').classList.add('hidden');
+            hideFeedback();
             document.getElementById('multAnswerInput').value = '';
+            document.getElementById('multHintBox').classList.add('hidden');
 
+            let n1, n2;
             if (state.multDifficulty === 'easy') {
-                state.multNum1 = Math.floor(Math.random() * 8) + 2; // ۲ تا ۹
-                state.multNum2 = Math.floor(Math.random() * 7) + 2; // ۲ تا ۸
+                n1 = Math.floor(Math.random() * 8) + 2; // 2 تا 9
+                n2 = Math.floor(Math.random() * 7) + 2; // 2 تا 8
             } else if (state.multDifficulty === 'medium') {
-                state.multNum1 = Math.floor(Math.random() * 240) + 12; // ۱۲ تا ۲۵۱
-                state.multNum2 = Math.floor(Math.random() * 8) + 2; // ۲ تا ۹
+                n1 = Math.floor(Math.random() * 280) + 25; // 25 تا 304
+                n2 = Math.floor(Math.random() * 8) + 2; // 2 تا 9
             } else if (state.multDifficulty === 'hard') {
-                state.multNum1 = Math.floor(Math.random() * 75) + 12; // ۱۲ تا ۸۶
-                state.multNum2 = Math.floor(Math.random() * 65) + 12; // ۱۲ تا ۷۶
+                n1 = Math.floor(Math.random() * 75) + 15; // 15 تا 89
+                n2 = Math.floor(Math.random() * 75) + 12; // 12 تا 86
             } else {
-                // سطح ۴: سه رقمی در دو رقمی
-                state.multNum1 = Math.floor(Math.random() * 750) + 123; // ۱۲۳ تا ۸۷۲
-                state.multNum2 = Math.floor(Math.random() * 75) + 12;  // ۱۲ تا ۸۶
+                n1 = Math.floor(Math.random() * 750) + 125; // 125 تا 874
+                n2 = Math.floor(Math.random() * 75) + 12; // 12 تا 86
             }
 
-            document.getElementById('multNum1').textContent = toPersianDigits(state.multNum1);
-            document.getElementById('multNum2').textContent = toPersianDigits(state.multNum2);
+            state.multNum1 = n1;
+            state.multNum2 = n2;
 
+            document.getElementById('multNum1').textContent = toPersianDigits(n1);
+            document.getElementById('multNum2').textContent = toPersianDigits(n2);
             renderMultiplyVisual();
         }
 
@@ -882,8 +1024,10 @@
                 container.classList.remove('hidden');
                 let groupsHtml = `<p class="text-xs sm:text-sm font-bold text-purple-900 mb-2">مفهوم ضرب: ${toPersianDigits(state.multNum2)} دستهٔ ${toPersianDigits(state.multNum1)} تایی</p><div class="flex flex-wrap justify-center gap-2">`;
                 for (let g = 0; g < state.multNum2; g++) {
-                    groupsHtml += `<div class="bg-purple-100 border border-purple-300 rounded-xl px-2.5 py-1 text-base">`;
-                    groupsHtml += '🟣'.repeat(state.multNum1);
+                    groupsHtml += `<div class="bg-purple-100 border border-purple-300 rounded-xl px-2.5 py-1.5 flex items-center gap-1">`;
+                    for (let item = 0; item < state.multNum1; item++) {
+                        groupsHtml += GFX.apple;
+                    }
                     groupsHtml += `</div>`;
                 }
                 groupsHtml += '</div>';
@@ -895,30 +1039,27 @@
         }
 
         function checkMultiplyAnswer() {
-            const userAns = parseInt(document.getElementById('multAnswerInput').value, 10);
-            const expectedAns = state.multNum1 * state.multNum2;
-
-            if (isNaN(userAns)) {
-                showFeedback('لطفاً حاصل‌ضرب را در کادر وارد کنید.', 'error');
+            const ans = parseInt(document.getElementById('multAnswerInput').value, 10);
+            if (isNaN(ans)) {
                 playSound('error');
+                showFeedback('⚠️ لطفاً حاصل‌ضرب را در کادر وارد کنید.', false);
                 return;
             }
-
-            if (userAns === expectedAns) {
+            const expected = state.multNum1 * state.multNum2;
+            if (ans === expected) {
                 playSound('success');
-                showFeedback(`🎉 عالیه! پاسخ کاملاً درست است: <span dir="ltr" class="inline-block font-black">${toPersianDigits(state.multNum1)} × ${toPersianDigits(state.multNum2)} = ${toPersianDigits(expectedAns)}</span>`, 'success');
+                const ptsMap = { easy: 15, medium: 25, hard: 35, super: 45 };
+                showFeedback(`🎉 عالی بود! <span dir="ltr" class="inline-block font-black math-num">${toPersianDigits(state.multNum1)} × ${toPersianDigits(state.multNum2)} = ${toPersianDigits(expected)}</span>`, true);
                 if (!state.multSolved) {
                     state.multSolved = true;
-                    const scoreMap = { easy: 10, medium: 20, hard: 30, super: 40 };
-                    addScore(scoreMap[state.multDifficulty] || 20);
+                    updateScore(ptsMap[state.multDifficulty] || 20);
                 }
             } else {
                 playSound('error');
-                showFeedback('پاسخ اشتباه است! روی دکمه «راهنمای مرحله‌به‌مرحله» کلیک کن تا گسترده‌نویسی کامل را ببینی.', 'error');
+                showFeedback('❌ حاصل‌ضرب دقیق نیست! روی دکمه «راهنمای مرحله‌به‌مرحله» کلیک کن تا روش گسترده‌نویسی این ضرب را ببینی.', false);
             }
         }
 
-        // تابع کمکی برای تجزیه عدد به اجزای گسترده (صدگان، دهگان، یکان)
         function getExpandedParts(num) {
             const parts = [];
             const hundreds = Math.floor(num / 100) * 100;
@@ -932,83 +1073,46 @@
 
         function toggleMultiplyHint() {
             const box = document.getElementById('multHintBox');
-            const content = document.getElementById('multHintContent');
             box.classList.toggle('hidden');
-
             if (!box.classList.contains('hidden')) {
-                const a = state.multNum1;
-                const b = state.multNum2;
+                const p1 = getExpandedParts(state.multNum1);
+                const p2 = getExpandedParts(state.multNum2);
+                const total = state.multNum1 * state.multNum2;
 
-                if (state.multDifficulty === 'easy') {
-                    const repeated = Array(b).fill(toPersianDigits(a)).join(' + ');
-                    content.innerHTML = `
-                        <div class="bg-white p-3 rounded-2xl border border-purple-200">
-                            ضرب یعنی جمع‌های برابر! پس <span dir="ltr" class="inline-block font-bold">${toPersianDigits(a)} × ${toPersianDigits(b)}</span> برابر است با:
-                            <div dir="ltr" class="font-black text-purple-800 mt-1 text-lg">${repeated} = ${toPersianDigits(a * b)}</div>
-                        </div>
-                    `;
-                } else {
-                    const partsA = getExpandedParts(a);
-                    const partsB = getExpandedParts(b);
+                let html = `<p><strong>گام ۱ (باز کردن گسترده‌نویسی اعداد):</strong></p>`;
+                html += `<p class="bg-white p-2.5 rounded-xl border border-purple-200 math-num">`;
+                html += `عدد اول: <span class="font-black text-purple-700">${toPersianDigits(state.multNum1)}</span> = ${p1.map(toPersianDigits).join(' + ')}<br>`;
+                html += `عدد دوم: <span class="font-black text-sky-700">${toPersianDigits(state.multNum2)}</span> = ${p2.map(toPersianDigits).join(' + ')}`;
+                html += `</p>`;
 
-                    let html = `<div class="bg-white p-4 rounded-2xl border border-purple-200 space-y-3">`;
-
-                    // گام ۱: نمایش گسترده‌نویسی اعداد
-                    html += `<div class="bg-purple-50/70 p-3 rounded-xl border border-purple-100 space-y-1">
-                        <p class="font-black text-purple-900">گام ۱: گسترده‌نویسی اعداد بر اساس ارزش مکانی</p>
-                        <div class="font-bold text-slate-700">
-                            • عدد <span class="text-purple-700 font-black">${toPersianDigits(a)}</span> = <span dir="ltr" class="inline-block font-black text-purple-800">${partsA.map(toPersianDigits).join(' + ')}</span>
-                        </div>`;
-                    if (partsB.length > 1) {
-                        html += `<div class="font-bold text-slate-700">
-                            • عدد <span class="text-sky-700 font-black">${toPersianDigits(b)}</span> = <span dir="ltr" class="inline-block font-black text-sky-800">${partsB.map(toPersianDigits).join(' + ')}</span>
-                        </div>`;
-                    }
-                    html += `</div>`;
-
-                    // گام ۲: ضرب کامل تک‌تک اجزای گسترده در هم
-                    html += `<div class="space-y-1.5">
-                        <p class="font-black text-indigo-900">گام ۲: ضرب هر بخش از عدد اول در هر بخش از عدد دوم</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">`;
-
-                    const allProducts = [];
-                    let stepCounter = 1;
-
-                    partsB.forEach(partB => {
-                        partsA.forEach(partA => {
-                            const prod = partA * partB;
-                            allProducts.push(prod);
-                            html += `
-                                <div dir="ltr" class="bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 font-bold text-slate-800 flex items-center justify-between">
-                                    <span class="text-xs text-slate-400 font-sans">(${toPersianDigits(stepCounter++)})</span>
-                                    <span>${toPersianDigits(partA)} × ${toPersianDigits(partB)} = <span class="text-emerald-700 font-black">${toPersianDigits(prod)}</span></span>
-                                </div>
-                            `;
-                        });
+                html += `<p><strong>گام ۲ (ضرب تک‌تک اجزا در یکدیگر):</strong></p><ul class="list-disc list-inside space-y-1 bg-white p-3 rounded-xl border border-purple-200 math-num">`;
+                const partialProducts = [];
+                p1.forEach(a => {
+                    p2.forEach(b => {
+                        const prod = a * b;
+                        partialProducts.push(prod);
+                        html += `<li><span dir="ltr" class="inline-block font-bold">${toPersianDigits(a)} × ${toPersianDigits(b)} = <span class="text-emerald-700 font-black">${toPersianDigits(prod)}</span></span></li>`;
                     });
+                });
+                html += `</ul>`;
 
-                    html += `</div></div>`;
+                html += `<p><strong>گام ۳ (جمع کردن تمام حاصل‌ضرب‌ها):</strong></p>`;
+                html += `<p class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-300 font-black text-emerald-950 math-num">${partialProducts.map(toPersianDigits).join(' + ')} = ${toPersianDigits(total)}</p>`;
 
-                    // گام ۳: جمع تمامی حاصل‌ضرب‌های جزئی
-                    html += `
-                        <div class="pt-3 border-t-2 border-purple-100 bg-emerald-50/60 p-3 rounded-xl">
-                            <p class="font-black text-emerald-950 mb-1">گام ۳: جمع تمام حاصل‌ضرب‌های مرحله قبل</p>
-                            <div dir="ltr" class="font-black text-base sm:text-lg text-emerald-800 break-words">
-                                ${allProducts.map(toPersianDigits).join(' + ')} = <span class="text-xl text-purple-900 underline">${toPersianDigits(a * b)}</span>
-                            </div>
-                        </div>
-                    </div>`;
-
-                    content.innerHTML = html;
-                }
+                document.getElementById('multHintContent').innerHTML = html;
             }
         }
 
-        // ==================== راه‌اندازی اولیه هنگام بارگذاری صفحه ====================
+        // ==================== شروع اولیه بازی پس از بارگذاری صفحه ====================
         window.onload = function () {
             initVisualQuestion();
             generateChallengeQuestion();
             generateMultiplyQuestion();
+
+            // پشتیبانی از کلید Enter برای ثبت سریع پاسخ‌ها
+            document.getElementById('visRemainderInput').addEventListener('keypress', e => { if (e.key === 'Enter') checkVisualAnswer(); });
+            document.getElementById('chalRemainderInput').addEventListener('keypress', e => { if (e.key === 'Enter') checkChallengeAnswer(); });
+            document.getElementById('multAnswerInput').addEventListener('keypress', e => { if (e.key === 'Enter') checkMultiplyAnswer(); });
         };
     </script>
 </body>
